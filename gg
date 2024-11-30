@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Valor do Sorvete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Valor do Sorvete</h1>
+        <p>Digite o peso em gramas:</p>
+        <input type="number" id="peso" placeholder="Peso em gramas">
+        <button onclick="calcularValor()">Calcular</button>
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularValor() {
+            const peso = parseFloat(document.getElementById('peso').value);
+
+            if (isNaN(peso) || peso <= 0) {
+                document.getElementById('resultado').innerText = "Por favor, insira um peso válido.";
+                return;
+            }
+
+            const valorPorGrama = 0.037; // 3 centavos por grama
+            const valorSorvete = peso * valorPorGrama;
+
+            document.getElementById('resultado').innerText = 
+                `O valor do sorvete é: R$ ${valorSorvete.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
