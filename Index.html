@@ -47,26 +47,49 @@
 <body>
     <div class="container">
         <h1>Calculadora de Valor do Sorvete</h1>
+
+        <!-- Cálculo por peso -->
         <p>Digite o peso em gramas:</p>
         <input type="number" id="peso" placeholder="Peso em gramas">
-        <button onclick="calcularValor()">Calcular</button>
-        <div class="result" id="resultado"></div>
+        <button onclick="calcularValorPorPeso()">Calcular por peso</button>
+
+        <div class="result" id="resultadoPeso"></div>
+
+        <!-- Cálculo por valor -->
+        <p>Digite o valor em reais:</p>
+        <input type="number" id="valor" placeholder="Valor em reais">
+        <button onclick="calcularPesoPorValor()">Calcular por valor</button>
+
+        <div class="result" id="resultadoValor"></div>
     </div>
 
     <script>
-        function calcularValor() {
+        const valorPorGrama = 0.037; // 3 centavos por grama
+
+        function calcularValorPorPeso() {
             const peso = parseFloat(document.getElementById('peso').value);
 
             if (isNaN(peso) || peso <= 0) {
-                document.getElementById('resultado').innerText = "Por favor, insira um peso válido.";
+                document.getElementById('resultadoPeso').innerText = "Por favor, insira um peso válido.";
                 return;
             }
 
-            const valorPorGrama = 0.037; // 3 centavos por grama
             const valorSorvete = peso * valorPorGrama;
+            document.getElementById('resultadoPeso').innerText = 
+                `R$ ${valorSorvete.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
 
-            document.getElementById('resultado').innerText = 
-                `O valor do sorvete é: R$ ${valorSorvete.toFixed(2)}`;
+        function calcularPesoPorValor() {
+            const valor = parseFloat(document.getElementById('valor').value);
+
+            if (isNaN(valor) || valor <= 0) {
+                document.getElementById('resultadoValor').innerText = "Por favor, insira um valor válido.";
+                return;
+            }
+
+            const pesoSorvete = Math.floor(valor / valorPorGrama); // Remove as casas decimais
+            document.getElementById('resultadoValor').innerText = 
+                `${pesoSorvete} gramas`;
         }
     </script>
 </body>
